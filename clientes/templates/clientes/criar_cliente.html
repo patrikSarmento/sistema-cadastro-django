@@ -1,0 +1,75 @@
+{% load static %}
+<!-- carrega o sistema de arquivos estaticos do django
+isso permite usar css js e imagens que estao na pasta static do projeto -->
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <!-- define o titulo da pagina que aparece na aba do navegador -->
+    <title>Novo Cliente</title>
+
+    <!-- conecta o html ao css usando o django
+    o django resolve esse caminho no backend e entrega o arquivo correto -->
+    <link rel="stylesheet" href="{% static 'clientes/css/style.css' %}" />
+  </head>
+
+  <body>
+    <!-- barra de navegacao apenas visual
+    faz parte do template que o django renderiza -->
+    <nav class="navbar">
+      <div class="logo">
+        <h1 class="titulo-sistema">Sistema de cadastro</h1>
+      </div>
+    </nav>
+
+    <!-- formulario html que se conecta diretamente com a view do django
+    method post indica que os dados serao enviados para o backend -->
+    <form class="form-cliente" method="post">
+      <!-- token de seguranca gerado no backend
+      o django valida esse token quando o formulario e enviado -->
+      {% csrf_token %}
+
+      <!-- label apenas visual -->
+      <label class="label-campo">Nome do Cliente:</label><br />
+
+      <!-- campo vindo do backend
+      o django transforma form.nome em um input html
+      esse campo esta ligado ao ClienteForm e ao model Cliente -->
+      {{ form.nome }}<br /><br />
+      <br /><br />
+      <br />
+
+      <label class="label-campo">Data de Nascimento:</label><br />
+
+      <!-- campo ligado ao backend
+      o valor digitado aqui chega no request.POST
+      e e validado pelo formulario do django -->
+      {{ form.data_nascimento }}<br /><br />
+      <br /><br /><br />
+
+      <label class="label-campo">Endereço:</label><br />
+
+      <!-- campo conectado ao model Cliente
+      o django sabe que esse valor pertence ao campo endereco -->
+      {{ form.endereco }}<br /><br /><br /><br /><br />
+
+      <label class="label-campo">Telefone:</label><br />
+
+      <!-- campo ligado ao backend
+      quando enviado o django associa esse valor ao cliente -->
+      {{ form.telefone }}<br /><br />
+
+      <!-- botao que envia o formulario
+      ao clicar o navegador envia os dados para a mesma url
+      o django recebe isso na view criar_cliente -->
+      <button class="btn-salvar" type="submit">Salvar</button>
+    </form>
+
+    <!-- rodape apenas visual
+    nao tem ligacao direta com o backend -->
+    <footer class="rodape">
+      <h1>@Patrik Sarmento da Silva</h1>
+    </footer>
+  </body>
+</html>

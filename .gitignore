@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]
@@ -205,3 +206,23 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+=======
+# python
+__pycache__/
+*.pyc
+
+# ambiente virtual
+venv/
+env/
+
+# django
+db.sqlite3
+staticfiles/
+
+# variaveis de ambiente
+.env
+
+# editores
+.vscode/
+.idea/
+>>>>>>> a15c132 (feat: sistema de cadastro de clientes com django)

@@ -1,0 +1,80 @@
+/* define o estilo geral da pagina com cor de fundo fonte padrao cor do texto e espacamento */
+body {
+  background: #f4f4f4;
+  color: #000;
+  font-family: Arial, sans-serif;
+  padding: 20px;
+}
+
+/* estiliza a barra de navegacao com cor de fundo espacamento e cantos arredondados */
+.navbar {
+  background: #1e3a8a;
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
+
+/* ajusta o titulo removendo margem centralizando o texto e aplicando cor clara */
+.titulo h1 {
+  margin: 0;
+  color: #ffffff;
+  text-align: center;
+}
+
+/* define o botao para criar novo cliente com cor destaque espacamento e formato de link */
+.btn-novo {
+  display: inline-block;
+  margin-bottom: 15px;
+  padding: 10px 15px;
+  background: #1e3a8a;
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: bold;
+}
+
+/* altera a cor do botao quando o mouse passa por cima */
+.btn-novo:hover {
+  background: #1d4ed8;
+}
+
+/* configura a tabela ocupando toda a largura e removendo espacos entre bordas */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #ffffff;
+}
+
+/* define bordas espacamento interno e alinhamento do texto nas celulas */
+th,
+td {
+  border: 1px solid #333;
+  padding: 10px;
+  text-align: left;
+}
+
+/* destaca o cabecalho da tabela com cor de fundo diferente */
+th {
+  background: #e5e7eb;
+}
+
+/* estiliza os links de acao removendo sublinhado e destacando o texto */
+.acao {
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* define a cor do link de editar */
+.editar {
+  color: #2563eb;
+}
+
+/* define a cor do link de excluir para indicar acao critica */
+.excluir {
+  color: #dc2626;
+}
+
+/* adiciona sublinhado ao passar o mouse para indicar interacao */
+.acao:hover {
+  text-decoration: underline;
+}

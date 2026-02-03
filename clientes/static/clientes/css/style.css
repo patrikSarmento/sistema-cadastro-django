@@ -1,0 +1,79 @@
+/* define um fundo em degradê suave para a pagina deixando o visual mais leve */
+body {
+  background-image: linear-gradient(#f5f7fa, #e4ecf1, #e1f5fe);
+}
+
+/* cria a barra de navegacao usando flexbox centraliza os itens e define cor altura e arredondamento */
+.navbar {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+  background-color: #1e3a8a;
+  height: 100px;
+  padding-top: 5px;
+  border-radius: 17px;
+}
+
+/* estiliza os campos do formulario definindo largura altura tamanho do texto e espacamento interno */
+#id_nome,
+#id_data_nascimento,
+#id_endereco,
+#id_telefone {
+  width: 35%;
+  height: 30px;
+  font-size: 25px;
+  padding: 8px;
+  border-radius: 5px;
+}
+
+/* ajusta o tamanho do texto do formulario e cria espacamento superior */
+.form-cliente {
+  font-size: 18px;
+  padding-top: 17px;
+}
+
+/* define a aparencia padrao do botao com fundo escuro texto claro e cantos arredondados */
+button {
+  background-color: black;
+  color: whitesmoke;
+  border-radius: 6px;
+  height: 40px;
+  width: 70px;
+}
+
+/* muda as cores do botao ao passar o mouse e indica que ele pode ser clicado */
+button:hover {
+  background-color: #e1f5fe;
+  color: black;
+  cursor: pointer;
+}
+
+/* centraliza o titulo aplica cor clara e controla o espaco ocupado dentro do flex */
+h1 {
+  text-align: center;
+  color: #e1f5fe;
+  flex: 0 0 20%;
+  margin-left: 20px;
+}
+
+/* cria espacamento nos labels para separar melhor os campos */
+label {
+  padding-bottom: 20px;
+  margin-bottom: 30px;
+}
+
+/* centraliza todo o conteudo do formulario */
+form {
+  text-align: center;
+}
+
+/* estiliza o rodape definindo altura borda cor de fundo texto claro e espacamento superior */
+footer {
+  height: 100px;
+  border: 1px solid black;
+  background: #1e3a8a;
+  color: white;
+  margin-top: 20px;
+  border-radius: 10px;
+}

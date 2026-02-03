@@ -1,0 +1,79 @@
+{% load static %}
+<!-- carrega o sistema de arquivos estaticos do django
+permite usar css e outros arquivos que estao na pasta static -->
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <!-- titulo da pagina exibido na aba do navegador -->
+    <title>Clientes</title>
+
+    <!-- css carregado atraves do django
+    o backend resolve esse caminho e entrega o arquivo correto -->
+    <link rel="stylesheet" href="{% static 'clientes/css/style3.css' %}" />
+  </head>
+
+  <body>
+    <!-- barra superior apenas visual
+    faz parte do template que o django renderiza -->
+    <nav class="navbar">
+      <div class="titulo">
+        <h1>Lista de Clientes</h1>
+      </div>
+    </nav>
+
+    <!-- link que aponta para uma url do django
+    {% url 'criar_cliente' %} busca a url pelo nome definido no urls.py
+    ao clicar o django chama a view criar_cliente -->
+    <a class="btn-novo" href="{% url 'criar_cliente' %}">Novo Cliente</a>
+
+    <!-- tabela usada para exibir dados vindos do backend -->
+    <table>
+      <tr>
+        <th>Nome</th>
+        <th>Telefone</th>
+        <th>Senha</th>
+        <th>Ações</th>
+      </tr>
+
+      <!-- loop do django template
+      percorre a lista clientes enviada pela view lista_clientes -->
+      {% for cliente in clientes %}
+      <tr>
+        <!-- exibe o nome do cliente
+        cliente.nome vem direto do model Cliente -->
+        <td>{{ cliente.nome }}</td>
+
+        <!-- exibe o telefone do cliente vindo do banco -->
+        <td>{{ cliente.telefone }}</td>
+
+        <!-- exibe a senha gerada no backend -->
+        <td>{{ cliente.senha }}</td>
+
+        <td>
+          <!-- link de editar
+          envia o id do cliente para a url
+          o django usa esse id para buscar o cliente no banco -->
+          <a class="acao editar" href="{% url 'editar_cliente' cliente.id %}">
+            Editar
+          </a>
+          |
+          <!-- link de excluir
+          tambem envia o id para o backend
+          a view excluir_cliente usa esse id para remover o registro -->
+          <a class="acao excluir" href="{% url 'excluir_cliente' cliente.id %}">
+            Excluir
+          </a>
+        </td>
+      </tr>
+
+      <!-- bloco executado se a lista clientes vier vazia do backend -->
+      {% empty %}
+      <tr>
+        <td colspan="4">Nenhum cliente cadastrado.</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </body>
+</html>
