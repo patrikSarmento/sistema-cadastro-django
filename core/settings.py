@@ -1,29 +1,27 @@
 """
-arquivo principal de configuracoes do projeto django
-configurado para uso em portfolio e deploy no Render,
-evitando expor dados sensiveis
+Configuracoes do projeto Django para portfolio e deploy no Render
+Com suporte a PostgreSQL, WhiteNoise para arquivos estaticos e variaveis de ambiente
 """
 
 from pathlib import Path
 import os
 import dj_database_url
 
-# diretorio base do projeto
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# chave secreta do django
+# Chave secreta
 SECRET_KEY = os.getenv(
     'DJANGO_SECRET_KEY',
-    'django-insecure-chave-exemplo-para-portfolio'
+    'django-insecure-exemplo-para-portfolio'
 )
 
-# DEBUG deve ser False em producao
+# Debug
 DEBUG = os.getenv('DJANGO_DEBUG', 'True') == 'True'
 
-# enderecos permitidos para acessar o projeto
+# Hosts permitidos
 ALLOWED_HOSTS = os.getenv('DJANGO_ALLOWED_HOSTS', 'localhost 127.0.0.1').split(' ')
 
-# aplicativos instalados
+# Aplicativos instalados
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -31,12 +29,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
-    # app principal
     'clientes',
 ]
 
+# Middlewares
 MIDDLEWARE = [
+    'whitenoise.middleware.WhiteNoiseMiddleware',  # WhiteNoise primeiro
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -65,20 +63,19 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'core.wsgi.application'
 
-# configuracao do banco de dados
-# usa DATABASE_URL no Render; se nao existir, usa banco local do pgAdmin
+# Banco de dados
 DATABASES = {
     'default': dj_database_url.config(
-        default='postgres://usuario_local:senha_local@localhost:5432/meu_banco_local'
+        default=os.getenv('DATABASE_URL')
     )
 }
 
-# configuracoes de login
+# Login
 LOGIN_URL = 'login'
 LOGIN_REQUIRED_URL = 'clientes'
 LOGOUT_REDIRECT_URL = 'login'
 
-# validacoes de senha
+# Validações de senha
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',},
     {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',},
@@ -86,19 +83,14 @@ AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',},
 ]
 
-# idioma e fuso horario
+# Idioma e fuso horário
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
 
-# arquivos estaticos
+# Arquivos estáticos
 STATIC_URL = '/static/'
-
-# pasta para coletar arquivos estaticos em producao
+STATICFILES_DIRS = [BASE_DIR / 'static']
 STATIC_ROOT = BASE_DIR / 'staticfiles'
-
-# pastas adicionais de arquivos estaticos
-STATICFILES_DIRS = [
-    BASE_DIR / 'static',
-]
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
